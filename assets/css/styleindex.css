@@ -1,0 +1,107 @@
+@import url(https://fonts.bunny.net/css?family=great-vibes:400);
+
+*{font-family: "Great Vibes";
+padding : 0px;
+margin : 0px;}
+
+body {
+    background-image: url(../images/backgroundaccueil.jpeg);
+    background-size: cover;
+    color: #fff;
+}
+
+header {
+    text-align: center;
+    padding: 50px 0;
+}
+
+h1 {
+    margin: 0;
+    font-size: 60px;
+}
+
+main {
+    text-align: center;
+    margin-top: 20px;
+    padding : 70px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 30px;
+    cursor: pointer;
+    border: 2px solid #fff;
+    background-color: transparent;
+    color: #fff;
+    margin: 0 10px;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Légère transparence au survol */
+}
+
+footer {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7); /* Fond noir semi-transparent pour le pied de page */
+    padding: 20px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 20px;
+}
+
+.form-container {
+    display: none;
+    margin-top: 20px;
+    transition: all 0.5s ease;
+}
+
+.form-container.active {
+    display: block;
+    font-size: 35px;
+}
+
+input {
+    width: 200px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+
+.modal {
+    display: none; 
+    position: fixed; 
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000; 
+}
+
+.modal h2 {
+    font-size: 40px;
+    padding: 40px;
+}
+
+.modal-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 4px solid #130603;
+    border-radius: 15px;
+    background-color: #04b1cc;
+    padding: 30px;
+    width: 25%;
+    height: 30%;
+    color: #ffffff;
+    background-color:#040709;
+    box-shadow: 0 0 10px #2D4454;
+
+}
+
+li {margin: 30px;}
