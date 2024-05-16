@@ -11,9 +11,10 @@
 <header>
     <nav>
     <ul>
-            <li><a href="/">Accueil</a></li>
+            <li><a href="/login">Accueil</a></li>
             <li><a href="/afficherrecettes">Recettes</a></li>
-            <li><a href="/creerrecette">créer une nouvlle recette</a></li>
+            <li><a href="/affichercommentaires">commentaires</a></li>
+            <li><a href="/afficherutilisateurs">utilisateurs</a></li>
         </ul>
     </nav>
 </header>

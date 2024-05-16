@@ -6,6 +6,14 @@
     <link rel="stylesheet" href="assets/css/styleindex.css">
 </head>
 <body>
+        <nav>
+            <ul>
+                <li><a href="/login">Accueil</a></li>
+                <li><a href="/creerrecette">créer une recette</a></li>
+                <li><a href="/affichercommentaires">commentaires</a></li>
+                <li><a href="/afficherutilisateurs">utilisateurs</a></li>
+            </ul>
+        </nav>
     <h1>Liste des recettes</h1>
     <ul>
         <?php foreach ($recettes as $recette): ?>
