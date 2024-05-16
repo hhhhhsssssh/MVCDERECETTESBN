@@ -9,6 +9,7 @@
         <nav>
             <ul>
                 <li><a href="/login">Accueil</a></li>
+                <li><a href="/logout">Déconnexion</a></li>
                 <li><a href="/creercommentaire">créer un commentaire</a></li>
                 <li><a href="/afficherrecettes">recettes</a></li>
                 <li><a href="/afficherutilisateurs">utilisateurs</a></li>

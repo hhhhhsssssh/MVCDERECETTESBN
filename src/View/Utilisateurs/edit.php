@@ -15,6 +15,7 @@
             <li><a href="/creerutilisateur">créer un utilisateur</a></li>
             <li><a href="/affichercommentaires">commentaires</a></li>
             <li><a href="/afficherrecettes">recettes</a></li>
+            <li><a href="/logout">Déconnexion</a></li>
         </ul>
     </nav>
     <main>

@@ -8,6 +8,7 @@ body {
     background-image: url(../images/backgroundaccueil.jpeg);
     background-size: cover;
     color: #fff;
+    margin-bottom: 30px;
 }
 
 header {

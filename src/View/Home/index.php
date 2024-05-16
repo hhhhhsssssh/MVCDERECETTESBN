@@ -11,11 +11,9 @@
 <header>
     <nav>
     <ul>
-            <li><a href="/login">Accueil</a></li>
-            <li><a href="/logout">Déconnexion</a></li>
-            <li><a href="/afficherrecettes">Recettes</a></li>
-            <li><a href="/affichercommentaires">commentaires</a></li>
-            <li><a href="/afficherutilisateurs">utilisateurs</a></li>
+            <li><a href="/login">Connexion</a></li>
+            <li><a href="/inscription">inscription</a></li>
+          
         </ul>
     </nav>
 </header>

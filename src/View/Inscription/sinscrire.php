@@ -10,16 +10,17 @@
 <header></header>
 <main>
 
-<form action="/login" method="post">
+<form action="/inscription" method="post">
 <label for="pseudo">pseudo :</label>
 <input type="text" id="pseudo" name="pseudo" required>
 
+<label for="email">email :</label>
+<input type="email" id="email" name="email" required>
 
 <label for="motdepasse">motdepasse :</label>
 <input type="text" id="motdepasse" name="motdepasse" required>
 
-<button type="submit">Se connecter</button>
+<button type="submit">S'inscrire</button>
 </form>
 
 </main>
-

@@ -9,6 +9,7 @@
         <nav>
             <ul>
                 <li><a href="/login">Accueil</a></li>
+                <li><a href="/logout">Déconnexion</a></li>
                 <li><a href="/creerutilisateur">créer un utilisateur</a></li>
                 <li><a href="/affichercommentaires">commentaires</a></li>
                 <li><a href="/afficherrecettes">recettes</a></li>
@@ -21,5 +22,8 @@
         <?php endforeach; ?>
     </ul>
 </body>
+
 <?php include 'src/View/templates/footer.php'; ?>
+<br>
+<br>
 </html>

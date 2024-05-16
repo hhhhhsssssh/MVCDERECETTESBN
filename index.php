@@ -4,23 +4,28 @@ require_once __DIR__.'/vendor/autoload.php';
 // Initialiser Dotenv
 use Symfony\Component\Dotenv\Dotenv;
 use App\Router;
-//use App\Controller\HomeController;//
+use App\Controller\HomeController;
 use App\Controller\RecettesController;
 use App\Controller\UtilisateursController;
 use App\Controller\CommentairesController;
 use App\Controller\AuthentificationController;
+use App\Controller\InscriptionController; 
 
 $dotenv = new Dotenv();
 $dotenv->load(__DIR__.'/.env');
 
-session_start();
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-$router = new Router();
+session_start(); // Démarre la session
 
-$router->register('GET', '/', function() {
-    $controller = new RecettesController();
+$router=new Router();
+
+$router->register('GET','/',function(){
+    $controller = new HomeController();
     $controller->index();
 });
+
+
 
 $router->register('GET', '/afficherrecettes', function() {
     $controller = new RecettesController();
@@ -55,10 +60,6 @@ $router->register('GET', '/recettes/delete/{id}', function($id) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-$router->register('GET', '/', function() {
-    $controller = new UtilisateursController();
-    $controller->index();
-});
 
 $router->register('GET', '/afficherutilisateurs', function() {
     $controller = new UtilisateursController();
@@ -92,11 +93,6 @@ $router->register('GET', '/utilisateurs/delete/{id}', function($id) {
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-$router->register('GET', '/', function() {
-    $controller = new CommentairesController();
-    $controller->index();
-});
 
 $router->register('GET', '/affichercommentaires', function() {
     $controller = new CommentairesController();
@@ -139,6 +135,24 @@ $router->register('POST', '/login', function() {
     $controller = new AuthentificationController();
     $controller->login();
 });
+
+$router->register('GET', '/logout', function() {
+    $controller = new AuthentificationController();
+    $controller->logout();
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+$router->register('GET', '/inscription', function() {
+    $controller = new InscriptionController();
+    $controller->showRegistrationForm();
+});
+
+$router->register('POST', '/inscription', function() {
+    $controller = new InscriptionController();
+    $controller->register();
+});
+
+
 
 $router->dispatch($_SERVER['REQUEST_METHOD'], parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 

@@ -1,9 +1,9 @@
 <?php
 
-// namespace App\Controller;
+ namespace App\Controller;
 
-// class HomeController {
-//     public function index() {
-//         include 'src/View/Recettes/index.php';
-//     }
-// } 
+ class HomeController {
+     public function index() {
+         include 'src/View/Home/index.php';
+     }
+ } 

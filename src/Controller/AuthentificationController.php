@@ -2,13 +2,13 @@
 
 namespace App\Controller;
 
-use App\Model\AuthentificationModel;
+use App\Model\UtilisateurModel;
 
 class AuthentificationController {
-    private $authModel;
+    private $utilisateurModel;
 
     public function __construct() {
-        $this->authModel = new AuthentificationModel();
+        $this->utilisateurModel = new UtilisateurModel();
     }
 
     public function showLoginForm() {
@@ -24,25 +24,45 @@ class AuthentificationController {
             $motdepasse = $_POST['motdepasse'];
 
             // Vérifier les informations de connexion
-            if ($this->authModel->checkPassword($pseudo, $motdepasse)) {
+            if ($this->utilisateurModel->checkPassword($pseudo, $motdepasse)) {
                 // Connexion réussie
                 // Démarrer la session et stocker les informations de l'utilisateur
                 session_start();
                 $_SESSION['pseudo'] = $pseudo;
 
-                // Rediriger vers la page d'accueil ou autre page
+                // Rediriger vers la page recettes
                 header('Location: /afficherrecettes');
                 exit();
             } else {
-                // Échec de la connexion
-                // Rediriger vers la page de connexion avec un message d'erreur
-                header('Location: /login?error=invalid_credentials');
-                exit();
+                // Vérifier si l'utilisateur existe déjà
+                if ($this->utilisateurModel->checkPseudoExists($pseudo)) {
+                    // Rediriger vers la page de connexion avec un message d'erreur
+                    header('Location: /login?error=invalid_credentials');
+                    exit();
+                } else {
+                    // Rediriger vers la page d'inscription
+                    header('Location: /inscription');
+                    exit();
+                }
             }
         } else {
             // Si la requête n'est pas POST, rediriger vers la page de connexion
             header('Location: /login');
             exit();
         }
+    }
+
+    public function logout() {
+        // Démarrer la session si elle n'est pas déjà démarrée
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // Fermer la session (supprimer les informations de l'utilisateur)
+        unset($_SESSION['pseudo']);
+
+        // Optionnel : rediriger vers la page de connexion ou une autre page appropriée
+        header('Location: /login');
+        exit();
     }
 }
