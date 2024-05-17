@@ -41,25 +41,27 @@ class UtilisateurModel {
    }
 
    public function findByPseudo($pseudo) {
+    // Exemple de requête pour trouver un utilisateur par son pseudo
     $stmt = $this->db->prepare("SELECT * FROM utilisateurs WHERE pseudo = :pseudo");
-    $stmt->execute([':pseudo' => $pseudo]);
+    $stmt->bindParam(':pseudo', $pseudo);
+    $stmt->execute();
+
+    // Récupérer le résultat sous forme de tableau associatif
     return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
+}
+
     public function checkPassword($pseudo, $motdepasse) {
+        // Trouver l'utilisateur par son pseudo
         $user = $this->findByPseudo($pseudo);
-
-        if (!$user) {
-            return false; // Utilisateur non trouvé
+    
+        // Vérifier si l'utilisateur a été trouvé
+        if ($user && is_array($user) && password_verify($motdepasse, $user['motdepasse'])) {
+            return $user; // Mot de passe correct, retourner les informations de l'utilisateur
         }
-
-        // Vérifier le mot de passe
-        if (password_verify($motdepasse, $user['motdepasse'])) {
-            return true; // Mot de passe correct
-        }
-
-        return false; // Mot de passe incorrect
+    
+        return false; // Utilisateur non trouvé ou mot de passe incorrect
     }
-
+    
     public function checkAnyExists($pseudo, $email) {
         // Vérifier si l'utilisateur existe déjà dans la base de données
         $stmt = $this->db->prepare("SELECT * FROM utilisateurs WHERE pseudo = :pseudo OR email = :email");

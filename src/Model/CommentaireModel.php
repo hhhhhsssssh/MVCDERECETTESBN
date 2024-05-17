@@ -17,9 +17,30 @@ class CommentaireModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function addCommentaire($commentaire, $jourcomment, $Utilisateurs_id) {
-        $stmt = $this->db->prepare("INSERT INTO commentaires (commentaire, `jour-comment`, Utilisateurs_id) VALUES (?, ?, ?)"); // Prépare et exécute l'insertion d'un commentaire
-        $stmt->execute([$commentaire, $jourcomment, $Utilisateurs_id]);
+    public function getCommentairesByRecetteId($recetteId) {
+        // Requête pour récupérer les commentaires d'une recette
+        $stmt = $this->db->prepare('SELECT * FROM Commentaires WHERE Recettes_id = :recette_id');
+        $stmt->bindParam(':recette_id', $recetteId);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function addCommentaire($commentaire, $utilisateurId, $recette_id) {
+        // Prépare la requête pour ajouter un commentaire
+        $stmt = $this->db->prepare("INSERT INTO Commentaires (commentaire, Utilisateurs_id, Recettes_id, `jour-comment`) VALUES (:commentaire, :utilisateur_id, :recette_id, NOW())");
+        $stmt->bindParam(':commentaire', $commentaire);
+        $stmt->bindParam(':utilisateur_id', $utilisateurId);
+        $stmt->bindParam(':recette_id', $recette_id);
+        $stmt->execute(); // Exécute la requête
+    }
+
+    public function addReponse($commentaire, $utilisateuId, $commentaire_id) {
+        // Prépare la requête pour ajouter une réponse à un commentaire
+        $stmt = $this->db->prepare("INSERT INTO Commentaires (commentaire, Utilisateurs_id, Commentaires_id, `jour-comment`) VALUES (:commentaire, :utilisateur_id, :commentaire_id, NOW())");
+        $stmt->bindParam(':commentaire', $commentaire);
+        $stmt->bindParam(':utilisateur_id', $utilisateurId);
+        $stmt->bindParam(':commentaire_id', $commentaire_id);
+        $stmt->execute(); // Exécute la requête
     }
     
 
@@ -39,5 +60,7 @@ class CommentaireModel {
        $stmt = $this->db->prepare("DELETE FROM commentaires WHERE id = ?");// Prépare et exécute la suppression d'un commentaire
        $stmt->execute([$id]);
    }
+////////////////////////////////
+
 
 }

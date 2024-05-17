@@ -1,4 +1,4 @@
-//en cliquant sur connexion ou inscription, affichage du formulaire qui convient
+/*//en cliquant sur connexion ou inscription, affichage du formulaire qui convient
 document.getElementById('btn-login').addEventListener('click', function() {
     document.getElementById('login-form').classList.toggle('active');
     document.getElementById('signup-form').classList.remove('active');
@@ -36,3 +36,7 @@ window.addEventListener('DOMContentLoaded', function() {
         showModal();
     }
 });
+
+*/
+
+

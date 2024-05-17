@@ -14,11 +14,12 @@ use App\Controller\InscriptionController;
 $dotenv = new Dotenv();
 $dotenv->load(__DIR__.'/.env');
 
-$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 session_start(); // Démarre la session
 
 $router=new Router();
+
+
 
 $router->register('GET','/',function(){
     $controller = new HomeController();
@@ -100,27 +101,38 @@ $router->register('GET', '/affichercommentaires', function() {
 });
 
 
-$router->register('GET', '/creercommentaire', function() {
+$router->register('GET', '/addCommentaire', function() {
     $controller = new CommentairesController();
-    $controller->create();
+    $controller->addCommentaire();
 });
 
-$router->register('POST', '/commentaires/save', function() {//enregistrer le commentaire créé dans la base de données
+$router->register('GET', '/addReponse', function() {
     $controller = new CommentairesController();
-    $controller->store();
+    $controller->addReponse();
 });
 
-$router->register('GET','/commentaires/edit/{id}',function($id){//formulaire modifier
+
+$router->register('POST', '/Commentaires/storeCommentaire', function() {
+    $controller = new CommentairesController();
+    $controller->storeCommentaire();
+});
+
+$router->register('POST', '/Commentaires/storeReponse', function() {
+    $controller = new CommentairesController();
+    $controller->storeReponse();
+});
+
+$router->register('GET','/Commentaires/edit/{id}',function($id){//formulaire modifier
     $controller = new CommentairesController();
     $controller->edit($id);
 });
 
-$router->register('POST','/commentaires/update',function(){//mettre à jour dans la base de données
+$router->register('POST','/Commentaires/update',function(){//mettre à jour dans la base de données
     $controller = new CommentairesController();
     $controller->update();
 });
 
-$router->register('GET', '/commentaires/delete/{id}', function($id) {
+$router->register('GET', '/Commentaires/delete/{id}', function($id) {
     $controller = new CommentairesController();
     $controller->delete($id);
 });
@@ -141,6 +153,7 @@ $router->register('GET', '/logout', function() {
     $controller->logout();
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Enregistrer les routes pour l'inscription
 
 $router->register('GET', '/inscription', function() {
     $controller = new InscriptionController();

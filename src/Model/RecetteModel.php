@@ -13,15 +13,17 @@ class RecetteModel {
     }
 
     public function getAllRecettes() {
-        $stmt = $this->db->query("SELECT * FROM recettes");
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->db->query("SELECT Recettes.*, Utilisateurs.pseudo AS pseudo_utilisateur
+                              FROM Recettes
+                              JOIN Utilisateurs ON Recettes.Utilisateurs_id = Utilisateurs.id");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+    public function addRecette($titre, $ingredients, $preparation, $lien_photo, $utilisateurId, $date_creation) {
+        // Préparez et exécutez la requête SQL pour insérer une nouvelle recette
+        $stmt = $this->db->prepare("INSERT INTO Recettes (titre, ingredients, preparation, `lien-photo`, `jour-post`, Utilisateurs_id) 
+                                    VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$titre, $ingredients, $preparation, $lien_photo, $date_creation, $utilisateurId]);
     }
-
-    public function addRecette($titre, $ingredients, $preparation, $lien_photo, $Utilisateurs_id) {
-        $stmt = $this->db->prepare("INSERT INTO recettes (titre, ingredients, preparation, `lien-photo`, Utilisateurs_id) VALUES (?, ?, ?, ?, ?)");
-        $stmt->execute([$titre, $ingredients, $preparation, $lien_photo, $Utilisateurs_id]);
-    }
-    
 
     public function getRecetteById($id): array 
     {

@@ -3,15 +3,21 @@
 namespace App\Controller;
 
 use App\Model\RecetteModel;
-
+use App\Model\CommentaireModel;
 class RecettesController {
     private $recetteModel;
+    private $commentaireModel;
 
     public function __construct() {
         $this->recetteModel = new RecetteModel();
+        $this->commentaireModel = new CommentaireModel();
     }
     public function index() {
         $recettes = $this->recetteModel->getAllRecettes();
+         // Pour chaque recette, récupérer les commentaires associés
+         foreach ($recettes as &$recette) {
+            $recette['commentaires'] = $this->commentaireModel->getCommentairesByRecetteId($recette['id']);
+        }
         include 'src/View/Recettes/index.php';
     }
 
@@ -20,14 +26,19 @@ class RecettesController {
     }
     
     public function store() {
-        $titre = $_POST['titre'];
-        $ingredients = $_POST['ingredients'];
-        $preparation = $_POST['preparation'];
-        $lien_photo = $_POST['lien-photo'];
-
-        $Utilisateurs_id = $_POST['Utilisateurs_id'];
-
-        $this->recetteModel->addRecette($titre, $ingredients, $preparation, $lien_photo, $Utilisateurs_id);
+         // Récupérez l'ID de l'utilisateur à partir de la session
+        $utilisateurId = $_SESSION['user']['id'];
+    
+        // Récupérez les données du formulaire
+        $titre = $_POST["titre"];
+        $ingredients = $_POST["ingredients"];
+        $preparation = $_POST["preparation"];
+        $lien_photo = $_POST["lien-photo"];
+        $date_creation =  date("Y-m-d"); 
+    
+        // Insérez les données dans la base de données
+        $this->recetteModel->addRecette($titre, $ingredients, $preparation, $lien_photo, $utilisateurId, $date_creation);
+    
         header('Location: /afficherrecettes');
    
     }
